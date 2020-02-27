@@ -2,20 +2,37 @@ import React, {useState} from 'react'
 import './App.css'
 
 export default function App() {
+    const [eightDimension, setEightDimensions] = useState(false)
     const [topLeft, setTopLeft] = useState(0)
     const [topRight, setTopRight] = useState(0)
     const [bottomRight, setBottomRight] = useState(0)
     const [bottomLeft, setBottomLeft] = useState(0)
 
     function getBorderRadius() {
-        return `${topLeft}px ${topRight}px ${bottomRight}px ${bottomLeft}px`
+        if(eightDimension) {
+            console.log('true')
+            return `${topLeft}px ${topRight}px ${bottomRight}px ${bottomLeft}px / ${topLeft}px ${topRight}px ${bottomRight}px ${bottomLeft}px`
+        } else {
+            console.log('false')
+            return `${topLeft}px ${topRight}px ${bottomRight}px ${bottomLeft}px`
+        }
+    }
+
+    function printCssformat() {
+        return `border-radius: ${getBorderRadius()} \n-webkit-border-radius: ${getBorderRadius()} \n-moz-border-radius: ${getBorderRadius()}`
     }
 
     function copyToClip() {
         const copyResult = document.getElementById('text-result')
+        copyResult.value = printCssformat()
         copyResult.select()
         copyResult.setSelectionRange(0, 99999)
         document.execCommand('copy')
+    }
+
+    function changeDimension(e) {
+        // const radio = document.getElementsByClassName('choose-dimension')
+        setEightDimensions(e.target.value)
     }
 
     return (
@@ -30,9 +47,13 @@ export default function App() {
                             <div>-webkit-border-radius: {getBorderRadius()}</div>
                             <div>-moz-border-radius: {getBorderRadius()}</div>
                         </div>
-                        {/* <textarea id="text-result" defaultValue={`border-radius: ${getBorderRadius()} \n-webkit-border-radius: ${getBorderRadius()} \n-moz-border-radius: ${getBorderRadius()}`}
-                        ></textarea> */}
-                        <input id="text-result" value={`border-radius: ${getBorderRadius()} \n-webkit-border-radius: ${getBorderRadius()} \n-moz-border-radius: ${getBorderRadius()}`} />
+                        <input id="text-result" />
+                        <div id="radio-items">
+                            <input type="radio" name="choose-dimension" id="four-d" defaultValue={false} onChange={(e) => changeDimension(e)} defaultChecked />
+                            <label htmlFor="four-d">4 dimensions</label>
+                            <input type="radio" name="choose-dimension" id="eight-d" defaultValue={true} onChange={(e) => changeDimension(e)} />
+                            <label htmlFor="eight-d">8 dimensions</label>
+                        </div>
                         <button onClick={() => copyToClip()}>Copy to clipboard</button>
                     </div>
 
