@@ -36,7 +36,7 @@ export default function App() {
     }
 
     function printCssformat() {
-        return `border-radius: ${getBorderRadius()} \n-webkit-border-radius: ${getBorderRadius()} \n-moz-border-radius: ${getBorderRadius()}`
+        return `border-radius: ${getBorderRadius()} \n;-webkit-border-radius: ${getBorderRadius()} \n;-moz-border-radius: ${getBorderRadius()}`
     }
 
     function isClear(side) {
@@ -66,8 +66,8 @@ export default function App() {
                     <div id="border-radius-element">
                         <div id="style-result">
                             <div>border-radius: {getBorderRadius()}</div>
-                            <div>-webkit-border-radius: {getBorderRadius()}</div>
-                            <div>-moz-border-radius: {getBorderRadius()}</div>
+                            <div>;-webkit-border-radius: {getBorderRadius()}</div>
+                            <div>;-moz-border-radius: {getBorderRadius()}</div>
                         </div>
                         <input id="text-result" />
                         <div id="radio-items">
