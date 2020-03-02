@@ -14,24 +14,34 @@ export default function App() {
 
     useEffect(() => {
         const borderElem = document.getElementById('border-radius-element')
-
+        let borderRadiusStyle
+        
         if(eightDimension==='true') {
-            borderElem.style.borderRadius = `${topLeft}px ${topRight}px ${bottomRight}px ${bottomLeft}px / ${topLeftAlt}px ${topRightAlt}px ${bottomRightAlt}px ${bottomLeftAlt}px`
+            borderRadiusStyle = `${isClear(topLeft)}px ${isClear(topRight)}px ${isClear(bottomRight)}px ${isClear(bottomLeft)}px / ${isClear(topLeftAlt)}px ${isClear(topRightAlt)}px ${isClear(bottomRightAlt)}px ${isClear(bottomLeftAlt)}px`
         } else {
-            borderElem.style.borderRadius = `${topLeft}px ${topRight}px ${bottomRight}px ${bottomLeft}px`
+            borderRadiusStyle = `${isClear(topLeft)}px ${isClear(topRight)}px ${isClear(bottomRight)}px ${isClear(bottomLeft)}px`
         }
+
+        isClear(topLeft)
+
+        borderElem.style.borderRadius = borderRadiusStyle
     })
 
     function getBorderRadius() {
         if(eightDimension==='true') {
-            return `${topLeft}px ${topRight}px ${bottomRight}px ${bottomLeft}px / ${topLeftAlt}px ${topRightAlt}px ${bottomRightAlt}px ${bottomLeftAlt}px`
+            return `${isClear(topLeft)}px ${isClear(topRight)}px ${isClear(bottomRight)}px ${isClear(bottomLeft)}px / ${isClear(topLeftAlt)}px ${isClear(topRightAlt)}px ${isClear(bottomRightAlt)}px ${isClear(bottomLeftAlt)}px`
         } else {
-            return `${topLeft}px ${topRight}px ${bottomRight}px ${bottomLeft}px`
+            return `${isClear(topLeft)}px ${isClear(topRight)}px ${isClear(bottomRight)}px ${isClear(bottomLeft)}px`
         }
     }
 
     function printCssformat() {
         return `border-radius: ${getBorderRadius()} \n-webkit-border-radius: ${getBorderRadius()} \n-moz-border-radius: ${getBorderRadius()}`
+    }
+
+    function isClear(side) {
+        if(side) return side
+        else return '0'
     }
 
     function copyToClip() {
